@@ -15,6 +15,10 @@
     <name>zero-oauth2</name>
     <description>Demo project for Oauth 2.0</description>
 
+    <modules>
+        <module>authorization-server</module>
+    </modules>
+
     <properties>
         <java.version>11</java.version>
     </properties>
