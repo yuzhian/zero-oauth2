@@ -31,7 +31,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
                 .withUser("james")
-                .password("{noop}123456")
+                .password("{bcrypt}$2a$10$w/.C6B4MGYMc.K9pO9UdVOfBEZkJf5bhV73hgS6sQMwtIMYZhIF06")
                 .authorities("ROLE_TESTER", "PROFILE_PRINCIPAL_GET")
         ;
     }
