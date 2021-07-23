@@ -8,6 +8,9 @@ import org.springframework.security.oauth2.config.annotation.configurers.ClientD
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
+
+import javax.sql.DataSource;
 
 /**
  * 授权服务配置
@@ -18,23 +21,19 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
     private final AuthenticationManager authenticationManager;
     private final UserDetailsService userDetailsService;
+    private final DataSource dataSource;
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
         endpoints
                 .authenticationManager(authenticationManager)
                 .userDetailsService(userDetailsService)
+                .tokenStore(new JdbcTokenStore(dataSource))
         ;
     }
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.inMemory()
-                .withClient("hello")
-                .secret("{bcrypt}$2a$10$24g7OHwy1u6a6v3jVd2jpOejB972sh1CnStDzkDIh2XVD4W7QtXDm")
-                .authorizedGrantTypes("authorization_code", "password", "implicit", "client_credentials", "refresh_token")
-                .scopes("Profile", "Followers")
-                .redirectUris("https://oauth.pstmn.io/v1/callback", "http://localhost:7000/login/oauth2/code/zero", "https://www.baidu.com")
-        ;
+        clients.jdbc(dataSource);
     }
 }
