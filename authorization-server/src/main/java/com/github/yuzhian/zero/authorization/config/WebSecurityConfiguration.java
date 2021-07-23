@@ -1,5 +1,6 @@
 package com.github.yuzhian.zero.authorization.config;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,12 +15,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
  */
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
-    @Bean
-    @Override
-    protected UserDetailsService userDetailsService() {
-        return super.userDetailsService();
-    }
+    private final UserDetailsService userDetailsService;
 
     @Bean
     @Override
@@ -29,11 +27,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("james")
-                .password("{bcrypt}$2a$10$w/.C6B4MGYMc.K9pO9UdVOfBEZkJf5bhV73hgS6sQMwtIMYZhIF06")
-                .authorities("ROLE_TESTER", "PROFILE_PRINCIPAL_GET")
-        ;
+        auth.userDetailsService(userDetailsService);
     }
 
     @Override
