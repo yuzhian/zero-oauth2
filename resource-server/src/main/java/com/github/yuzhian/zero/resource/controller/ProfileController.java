@@ -1,4 +1,4 @@
-package com.github.yuzhian.zero.authorization.controller;
+package com.github.yuzhian.zero.resource.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Profile;

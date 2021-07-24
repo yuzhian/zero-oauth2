@@ -1,4 +1,4 @@
-package com.github.yuzhian.zero.authorization.config;
+package com.github.yuzhian.zero.resource.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
