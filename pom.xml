@@ -58,6 +58,12 @@
             <artifactId>commons-pool2</artifactId>
         </dependency>
 
+        <!-- freemarker -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-freemarker</artifactId>
+        </dependency>
+
         <!-- java11: Java EE modules -->
         <dependency>
             <groupId>javax.xml.bind</groupId>
